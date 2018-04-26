@@ -13,4 +13,10 @@ app.listen(HTTP_PORT, () => {
     console.log(`Connected to HTTP_PORT: ${HTTP_PORT}`)
 });
 
+app.post('/msg', (req, res) => {
+    let msg = req.body;
+    p2pServer.sendMsg(msg);
+    res.json({"test" : "some Responce"});
+});
+
 p2pServer.listen();

@@ -38,8 +38,16 @@ class P2pServer {
 
     msgHandler(socket) {
         socket.on('message', (msg) => {
-           let data = JSON.parse(msg);
+           let data = msg;
            console.log(`MSG: ${data}`); 
+        });
+    }
+
+    sendMsg(msg) {
+        this.sockets.forEach(peer => {
+            if ((peer.readyState === WebSocket.OPEN) && (peer !== peers[0])) {
+                peer.send(JSON.stringify(msg));
+            }
         });
     }
 }
