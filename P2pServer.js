@@ -7,27 +7,39 @@ class P2pServer {
     constructor() {
         this.sockets = [];
     }
-    
+
     listen() {
-        const wss = new WebSocket.Server({port: P2P_PORT});
+        const wss = new WebSocket.Server({port : P2P_PORT});
 
         wss.on('connection', ws => {
-            this.connectToSocket(ws);
+            this.connectSocket(ws);
         });
 
         this.connectToPeers();
     }
 
-    connectToSocket(ws) {
-        this.sockets.push(ws);
-        console.log(`Connected to WScoket: ${ws}`);
+    connectSocket(socket) {
+        this.sockets.push(socket);
+        this.msgHandler(socket);
     }
 
     connectToPeers() {
         peers.forEach(peer => {
-            //ws://localhost:5001
-            this.sockets.push(peer);
-            console.log(`Connected to peer in PORT: ${peer}`);
+            const ws = new WebSocket(peer);
+
+            ws.on('open', () => {
+                this.connectSocket(ws);
+                console.log(`Connected to peer: ${peer}`);
+
+                ws.send(JSON.stringify(`Connection established: ${peer} --> ${P2P_PORT}`));
+            });
+        });
+    }
+
+    msgHandler(socket) {
+        socket.on('message', (msg) => {
+           let data = JSON.parse(msg);
+           console.log(`MSG: ${data}`); 
         });
     }
 }
