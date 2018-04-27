@@ -3,7 +3,7 @@ const Block = require('./block');
 describe('Block', () =>{
 
     let data,
-        prevHash,
+        prevBlock,
         block;
 
     beforeEach(() => {
@@ -14,5 +14,9 @@ describe('Block', () =>{
 
     it('blockData = inputData', () => {
         expect(block.data).toEqual(data);
+    });
+
+    it("Mined block.prevHash = prevBlock.hash", () => {
+        expect(block.prevHash).toEqual(prevBlock.hash);
     });
 });
