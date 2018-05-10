@@ -9,17 +9,17 @@ describe('Blockchain', () => {
         blockchain = new Blockchain();
     });
 
-    it('clockchain genesis block = genesis block', () => {
+    it('Verify that genesis block match the original', () => {
         expect(blockchain.chain[0]).toEqual(Block.genesis());
     });
 
-    it('mined block verified data', () => {
+    it('Mined block verified data', () => {
         const data = 'test';
         const newBlock = blockchain.addBlock(data);
         expect(newBlock.data).toEqual(data);
     });
 
-    it('blocks in chain must have/match prevBlock hash', () => {
+    it('Blocks in chain must have/match prevBlock hash', () => {
 
         const data = 'test';
         blockchain.addBlock(data);

@@ -9,8 +9,15 @@ app.use(bodyParser.json());
 
 const p2pServer = new P2PServer();
 
+
+app.use(express.static(__dirname + '/'));
+
 app.listen(HTTP_PORT, () => {
     console.log(`Connected to HTTP_PORT: ${HTTP_PORT}`)
+});
+
+app.get('/', (req, res) => {
+     res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/msg', (req, res) => {
