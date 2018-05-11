@@ -18,7 +18,7 @@ describe('Blockchain', () => {
     it('Invalidates corrupt genesis block', () => {
         blockchain2.chain[0].data = 'corrupt data';
 
-        expect(blockchain.isValidChain(blockchain2.chain)).toBe(false));
+        expect(blockchain.isValidChain(blockchain2.chain)).toBe(false);
     });
 
     it('Mined block verified data', () => {
@@ -28,12 +28,29 @@ describe('Blockchain', () => {
     });
 
     it('Validate chain', () => {
-
-        const data = 'test';
-        blockchain2.addBlock(data);
-        blockchain2.addBlock(data);
-        blockchain.addBlock(data);
+        blockchain2.addBlock('data');
 
         expect(blockchain.isValidChain(blockchain2.chain)).toBe(true);
+    });
+
+    it('Invalidate corrupt chain', () => {
+        blockchain2.addBlock('test');
+        blockchain2.chain[1].data = 'corrupt data';
+
+        expect(blockchain.isValidChain(blockchain2.chain)).toBe(false);
+    });
+
+    it('Replaces chain with longer chain' , () => {
+        blockchain2.addBlock('test');
+        blockchain.replaceChain(blockchain2.chain);
+
+        expect(blockchain.chain).toEqual(blockchain2.chain);
+    });
+
+    it('Does not replace chain with shorter chain', () => {
+        blockchain.addBlock('test');
+        blockchain.replaceChain(blockchain2.chain);
+
+        expect(blockchain.chain).not.toEqual(blockchain2.chain);
     });
 });
