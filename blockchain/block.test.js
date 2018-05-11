@@ -19,4 +19,8 @@ describe('Block', () =>{
     it("Mined block.prevHash = prevBlock.hash", () => {
         expect(block.prevHash).toEqual(prevBlock.hash);
     });
+
+    it("Block hash is correct", () => {
+       expect(block.hash === Block.blockHash(block)).toBe(true);
+    });
 });

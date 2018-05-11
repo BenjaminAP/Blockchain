@@ -12,7 +12,10 @@ const p2pServer = new P2PServer();
 
 app.use(express.static(__dirname + '/'));
 
-app.listen(HTTP_PORT, () => {
+app.listen(HTTP_PORT, (error) => {
+    if (error) {
+        console.log(error);
+    }
     console.log(`Connected to HTTP_PORT: ${HTTP_PORT}`)
 });
 
