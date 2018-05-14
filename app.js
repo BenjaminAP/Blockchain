@@ -31,13 +31,13 @@ app.post('/msg', (req, res) => {
 });
 
 app.get('/blockchain', (req, res) => {
-    // console.log(p2pServer.getBlockchain());
     res.json(p2pServer.blockchain.chain);
 });
 
 app.post('/mine', (req, res) => {
     const data = req.body.data;
     const block = p2pServer.addBlock(data);
+    p2pServer.syncBlockchain()
 
     res.redirect('/blockchain');
 });

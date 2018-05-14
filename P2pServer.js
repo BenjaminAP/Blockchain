@@ -23,7 +23,7 @@ class P2pServer {
     connectSocket(socket) {
         this.msgHandler(socket);
         this.sockets.push(socket);
-        socket.send(JSON.stringify(this.blockchain.chain));
+        socket.send(this.sendBlockchain());
     }
 
     connectToPeers() {
@@ -53,12 +53,18 @@ class P2pServer {
         });
     }
 
-    getBlockchain() {
-        return this.blockchain.toString();
+    sendBlockchain() {
+        return JSON.stringify(this.blockchain.chain);
     }
 
     addBlock(data, responce) {
         return this.blockchain.addBlock(data);
+    }
+
+    syncBlockchain() {
+        this.sockets.forEach(socket => {
+           socket.send(this.sendBlockchain());
+        });
     }
 }
 
