@@ -15,7 +15,7 @@ class Blockchain {
         return newBlock;
     }
 
-    isValidChain(chain) {
+     isValidChain(chain) {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
             return false;
 
@@ -43,6 +43,12 @@ class Blockchain {
 
         console.log("replacing chain with new one");
         this.chain = chain;
+    }
+
+    toString() {
+        this.chain.forEach(block => {
+           console.log(block.toString());
+        });
     }
 
 }

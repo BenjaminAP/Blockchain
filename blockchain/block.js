@@ -41,7 +41,7 @@ class Block {
     toString() {
         return `Block --
             timestamp: ${this.timestamp}
-            lastHash: ${this.lastHash}
+            prevHash: ${this.prevHash}
             hash: ${this.hash}
             data: ${this.data}`;
     }

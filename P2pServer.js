@@ -1,10 +1,12 @@
 const WebSocket = require('ws');
+const Blockchain = require('./blockchain/blockchain');
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 
 class P2pServer {
     constructor() {
+        this.blockchain = new Blockchain();
         this.sockets = [];
     }
 
@@ -19,8 +21,9 @@ class P2pServer {
     }
 
     connectSocket(socket) {
-        this.sockets.push(socket);
         this.msgHandler(socket);
+        this.sockets.push(socket);
+        socket.send(JSON.stringify(this.blockchain.chain));
     }
 
     connectToPeers() {
@@ -29,27 +32,35 @@ class P2pServer {
 
             ws.on('open', () => {
                 this.connectSocket(ws);
-                console.log(`Connected to peer: ${peer}`);
-
-                ws.send(JSON.stringify(`Connection established: ${peer} --> ${P2P_PORT}`));
             });
         });
     }
 
+
     msgHandler(socket) {
         socket.on('message', (msg) => {
-           let data = msg;
-           console.log(`MSG: ${data}`); 
+            const chain = JSON.parse(msg);
+            this.blockchain.replaceChain(chain);
         });
     }
 
     sendMsg(msg) {
         this.sockets.forEach(peer => {
-            if ((peer.readyState === WebSocket.OPEN) && (peer !== peers[0])) {
+            // if ((peer.readyState === WebSocket.OPEN) && (peer !== peers[0])) {
+            if (peer.readyState === WebSocket.OPEN) {
                 peer.send(JSON.stringify(msg));
             }
         });
     }
+
+    getBlockchain() {
+        return this.blockchain.toString();
+    }
+
+    addBlock(data, responce) {
+        return this.blockchain.addBlock(data);
+    }
 }
+
 
 module.exports = P2pServer;

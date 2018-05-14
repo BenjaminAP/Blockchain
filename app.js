@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const P2PServer = require('./P2pServer');
 
+const Block = require('./blockchain/block');
+
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
 const app = express();
@@ -25,8 +27,21 @@ app.get('/', (req, res) => {
 
 app.post('/msg', (req, res) => {
     let msg = req.body;
-    p2pServer.sendMsg(msg);
     res.json({"test" : "some Responce"});
 });
+
+app.get('/blockchain', (req, res) => {
+    // console.log(p2pServer.getBlockchain());
+    res.json(p2pServer.blockchain.chain);
+});
+
+app.post('/mine', (req, res) => {
+    const data = req.body.data;
+    const block = p2pServer.addBlock(data);
+
+    res.redirect('/blockchain');
+});
+
+
 
 p2pServer.listen();
