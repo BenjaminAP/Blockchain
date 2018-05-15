@@ -10,7 +10,7 @@ class Blockchain {
     }
 
     addBlock(data) {
-        const newBlock = Block.mineBlock(this.getLastBlock(), data)
+        const newBlock = Block.mineBlock(this.getLastBlock(), data);
         this.chain.push(newBlock);
         return newBlock;
     }

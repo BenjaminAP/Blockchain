@@ -1,4 +1,5 @@
 const Block = require('./block');
+const { DIFFICULTY } = require('../config');
 
 describe('Block', () =>{
 
@@ -22,5 +23,9 @@ describe('Block', () =>{
 
     it("Block hash is correct", () => {
        expect(block.hash === Block.blockHash(block)).toBe(true);
+    });
+
+    it("Validates proof of work with leading ZEROS = DIFFICULTY level", () => {
+       expect(block.hash.substr(0, DIFFICULTY)).toEqual('0'.repeat(DIFFICULTY));
     });
 });

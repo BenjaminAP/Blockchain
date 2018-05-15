@@ -1,10 +1,12 @@
 const SHA256 = require('crypto-js/sha256');
+const { DIFFICULTY } = require('../config');
 
 class Block {
-    constructor(timestamp, prevHash, hash, data) {
+    constructor(timestamp, prevHash, hash, data, nonce) {
         this.timestamp = timestamp;
         this.prevHash = prevHash;
         this.hash = hash;
+        this.nonce = nonce;
         this.data = data;
     }
 
@@ -13,36 +15,43 @@ class Block {
                 'Genesis Time', 
                 '------------',
                 'x00000000000',
-                []);
+                [],
+                0);
     }
 
-    static generateHash(timestamp, prevHash, data) {
-        return SHA256(`${timestamp}${prevHash}${data}`).toString();
+
+    ///TODO: proof of work
+    static generateHash(timestamp, prevHash, data, nonce) {
+        return SHA256(`${timestamp}${prevHash}${data}${nonce}`).toString();
     }
 
     static mineBlock(prevBlock, data) {
-        const timestamp = Date.now();
-        const prevHash = prevBlock.hash;
-        const hash = this.generateHash(timestamp, prevHash, data);
+        let hash, timestamp;
+        let nonce = 0;
 
-        return new Block(timestamp, prevHash, hash, data);
+        const prevHash = prevBlock.hash;
+
+        //proof of work.
+        do {
+            nonce++;
+            timestamp = Date.now();
+            hash = this.generateHash(timestamp, prevHash, data, nonce);
+        } while (hash.substr(0, DIFFICULTY) !== '0'.repeat(DIFFICULTY));
+
+        return new Block(timestamp, prevHash, hash, data, nonce);
     }
 
     static blockHash(block) {
-        return this.generateHash(block.timestamp, block.prevHash, block.data)
+        return this.generateHash(block.timestamp, block.prevHash, block.data, block.nonce);
     }
 
-
-
-    static proofOfWork() {
-        return "";
-    }
 
     toString() {
         return `Block --
             timestamp: ${this.timestamp}
             prevHash: ${this.prevHash}
             hash: ${this.hash}
+            nonce: ${this.nonce}
             data: ${this.data}`;
     }
 }

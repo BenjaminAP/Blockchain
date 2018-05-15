@@ -51,6 +51,6 @@ describe('Blockchain', () => {
         blockchain.addBlock('test');
         blockchain.replaceChain(blockchain2.chain);
 
-        expect(blockchain.chain).not.toEqual(blockchain2.chain);
+        expect(JSON.stringify(blockchain.chain)).not.toEqual(JSON.stringify(blockchain2.chain));
     });
 });
