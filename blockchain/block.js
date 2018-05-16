@@ -46,11 +46,17 @@ class Block {
 
     static adjustDifficulty(prevBlock, currentTime) {
         let difficulty = prevBlock.difficulty;
-        return prevBlock.timestamp + MINE_RATE > currentTime ? difficulty++ : difficulty--;
+        return prevBlock.timestamp + MINE_RATE > currentTime ?
+            difficulty + 1 : difficulty - 1;
     }
 
     static blockHash(block) {
-        return this.generateHash(block.timestamp, block.prevHash, block.nonce, block.difficulty, block.data);
+        return this.generateHash(
+                        block.timestamp,
+                        block.prevHash,
+                        block.nonce,
+                        block.difficulty,
+                        block.data);
     }
 
 
