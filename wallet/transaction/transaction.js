@@ -1,5 +1,5 @@
-const ChainUtil = require('../utils/chain_util');
-
+const ChainUtil = require('../../utils/chain_util');
+const OutDetails = require(`./wallet/transaction/output_details`);
 class Transaction {
     constructor() {
         this.id = ChainUtil.generateUID();
@@ -22,18 +22,19 @@ class Transaction {
         }
 
         let transaction = new Transaction();
+        const outDetails = new OutDetails(senderWallet, recipient, amount);
 
-        transaction.output.push([
-            {
-                amount: senderWallet.balance - amount,
-                address: senderWallet.publicKey
-            },
-            {
-                amount,
-                address: recipient
-            }
-        ]);
+        transaction.output.push(outDetails);
 
         return transaction;
     }
+
+    toString() {
+        return `Transaction :
+        id      : ${this.id}
+        input   : ${this.input}
+        output  : ${JSON.stringify(this.output)} `
+    }
 }
+
+module.exports = Transaction;
