@@ -13,4 +13,27 @@ class Transaction {
             input   : ${this.input}
             output  : ${this.output}`
     }
+
+    static newTransaction(senderWallet, recipient, amount) {
+
+        if (senderWallet.balance < amount){
+            console.log("Amount send larger than balance.");
+            return;
+        }
+
+        let transaction = new Transaction();
+
+        transaction.output.push([
+            {
+                amount: senderWallet.balance - amount,
+                address: senderWallet.publicKey
+            },
+            {
+                amount,
+                address: recipient
+            }
+        ]);
+
+        return transaction;
+    }
 }
