@@ -46,8 +46,15 @@ class Block {
 
     static adjustDifficulty(prevBlock, currentTime) {
         let difficulty = prevBlock.difficulty;
-        return prevBlock.timestamp + MINE_RATE > currentTime ?
-            difficulty + 1 : difficulty - 1;
+
+        if (prevBlock.timestamp + MINE_RATE > currentTime){
+            return  difficulty + 1;
+        } else {
+            if (difficulty == 1)
+                return difficulty;
+
+            return difficulty - 1;
+        }
     }
 
     static blockHash(block) {
