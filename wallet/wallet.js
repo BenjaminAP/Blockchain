@@ -11,7 +11,7 @@ class Wallet {
     toString() {
         return `Wallet: 
             balance     : ${this.balance}
-            keyPare     : ${JSON.stringify(this.keyPare).substr(25)}
+            keyPare     : ${JSON.stringify(this.keyPare)}
             publicKey   : ${JSON.stringify(this.publicKey)}`
     }
 }

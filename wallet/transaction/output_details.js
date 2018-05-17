@@ -3,7 +3,7 @@ class OutDetails {
     constructor(senderWallet, recipient, amount) {
         this.sender = {
             expectedBalance :  senderWallet.balance - amount,
-            publicKey       : senderWallet.publicKey
+            address       : senderWallet.publicKey
         };
 
         this.recipient = {

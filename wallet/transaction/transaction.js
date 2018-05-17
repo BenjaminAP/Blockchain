@@ -1,10 +1,16 @@
 const ChainUtil = require('../../utils/chain_util');
-const OutDetails = require(`./wallet/transaction/output_details`);
+const OutDetails = require(`./output_details`);
+
 class Transaction {
-    constructor() {
+    constructor(senderWallet, recipient, amount) {
+
         this.id = ChainUtil.generateUID();
         this.input = null;
-        this.output = [];
+        this.output = new OutDetails(senderWallet, recipient, amount);
+    }
+
+    transactionOutputSender() {
+        return JSON.stringify(this.output.sender);
     }
 
     toString() {
@@ -14,26 +20,26 @@ class Transaction {
             output  : ${this.output}`
     }
 
-    static newTransaction(senderWallet, recipient, amount) {
-
-        if (senderWallet.balance < amount){
-            console.log("Amount send larger than balance.");
-            return;
-        }
-
-        let transaction = new Transaction();
-        const outDetails = new OutDetails(senderWallet, recipient, amount);
-
-        transaction.output.push(outDetails);
-
-        return transaction;
-    }
+    // static newTransaction(senderWallet, recipient, amount) {
+    //
+    //     if (senderWallet.balance < amount){
+    //         console.log("Amount send larger than balance.");
+    //         return;
+    //     }
+    //
+    //     let transaction = new Transaction();
+    //     // const outDetails =
+    //
+    //     transaction.output = new OutDetails(senderWallet, recipient, amount);
+    //
+    //     return transaction;
+    // }
 
     toString() {
         return `Transaction :
         id      : ${this.id}
         input   : ${this.input}
-        output  : ${JSON.stringify(this.output)} `
+        output  : ${JSON.stringify(this.output)}`
     }
 }
 
