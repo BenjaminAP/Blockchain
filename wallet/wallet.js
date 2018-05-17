@@ -9,9 +9,9 @@ class Wallet {
 
     toString() {
         return `Wallet: 
-            balance = ${this.balance}
-            keyPare = ${JSON.stringify(this.keyPare).substr(25)}
-            publicKey = ${JSON.stringify(this.publicKey)}`
+            balance     : ${this.balance}
+            keyPare     : ${JSON.stringify(this.keyPare).substr(25)}
+            publicKey   : ${JSON.stringify(this.publicKey)}`
     }
 }
 
