@@ -15,9 +15,23 @@ describe('Transaction', () => {
        transaction = new Transaction(wallet1, recipient, amount);
     });
 
-    it('Sender public key is correct', () => {
-        const sender = JSON.parse(transaction.transactionOutputSender());
+    it('Output sender public key(address is correct', () => {
+        const sender = JSON.parse(transaction.getOutputSender());
         expect(sender.address).toEqual(wallet1.publicKey);
     });
 
+    it('Output sender has expected balance', () =>{
+        const sender = JSON.parse(transaction.getOutputSender());
+        expect(sender.expectedBalance).toEqual(wallet1.balance - amount);
+    });
+
+    it('Output recipient address correct', () => {
+        const outRecipient = JSON.parse(transaction.getOutputRecipient());
+        expect(outRecipient.address).toEqual(recipient);
+    });
+
+    it('Output recipient amount received correct', () => {
+        const outRecipient = JSON.parse(transaction.getOutputRecipient());
+        expect(outRecipient.amountReceived).toEqual(amount);
+    });
 });

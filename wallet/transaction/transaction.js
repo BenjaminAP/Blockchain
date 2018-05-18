@@ -9,8 +9,12 @@ class Transaction {
         this.output = new OutDetails(senderWallet, recipient, amount);
     }
 
-    transactionOutputSender() {
+    getOutputSender() {
         return JSON.stringify(this.output.sender);
+    }
+
+    getOutputRecipient() {
+        return JSON.stringify(this.output.recipient);
     }
 
     toString() {
