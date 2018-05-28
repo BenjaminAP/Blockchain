@@ -8,6 +8,10 @@ class Wallet {
         this.publicKey = this.keyPare.getPublic().encode('hex');
     }
 
+    sign(hashedData) {
+        return this.keyPare.sign(hashedData);
+    }
+
     toString() {
         return `Wallet: 
             balance     : ${this.balance}

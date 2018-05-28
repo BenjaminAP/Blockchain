@@ -25,10 +25,10 @@ app.get('/', (req, res) => {
      res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/msg', (req, res) => {
-    let msg = req.body;
-    res.json({"test" : "some Responce"});
-});
+// app.post('/msg', (req, res) => {
+//     let msg = req.body;
+//     res.json({"test" : "some Responce"});
+// });
 
 app.get('/blockchain', (req, res) => {
     res.json(p2pServer.blockchain.chain);

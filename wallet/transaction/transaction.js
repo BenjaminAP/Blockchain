@@ -1,5 +1,6 @@
 const ChainUtil = require('../../utils/chain_util');
 const OutDetails = require(`./output_details`);
+const inDetails = require(`./input_details`);
 
 class Transaction {
     constructor(senderWallet, recipient, amount) {
