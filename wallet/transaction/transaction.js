@@ -1,6 +1,6 @@
-const ChainUtil = require('../../utils/chain_util');
 const OutDetails = require(`./output_details`);
-const inDetails = require(`./input_details`);
+const InDetails = require(`./input_details`);
+const ChainUtil = require('../../utils/chain_util');
 
 class Transaction {
     constructor(senderWallet, recipient, amount) {
@@ -16,6 +16,10 @@ class Transaction {
 
     getOutputRecipient() {
         return JSON.stringify(this.output.recipient);
+    }
+
+    static signTransaction(transaction, sendersWallet) {
+        transaction.input = new InDetails(transaction, sendersWallet);
     }
 
     toString() {

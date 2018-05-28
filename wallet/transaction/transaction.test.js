@@ -13,6 +13,7 @@ describe('Transaction', () => {
        recipient = 'fsdag334g';
        amount = 30;
        transaction = new Transaction(wallet1, recipient, amount);
+       Transaction.signTransaction(transaction, wallet1);
     });
 
     it('Output sender public key(address is correct', () => {
@@ -33,5 +34,9 @@ describe('Transaction', () => {
     it('Output recipient amount received correct', () => {
         const outRecipient = JSON.parse(transaction.getOutputRecipient());
         expect(outRecipient.amountReceived).toEqual(amount);
+    });
+
+    it('Transaction input amount equals sender balance', () => {
+        expect(transaction.input.currentAmount).toEqual(wallet1.balance);
     });
 });
