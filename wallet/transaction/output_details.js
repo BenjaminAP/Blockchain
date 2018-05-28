@@ -1,4 +1,6 @@
-
+//Details about transaction
+//--senders
+//--recipient
 class OutDetails {
     constructor(senderWallet, recipient, amount) {
         this.sender = {

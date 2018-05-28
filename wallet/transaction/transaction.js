@@ -22,6 +22,12 @@ class Transaction {
         transaction.input = new InDetails(transaction, sendersWallet);
     }
 
+    static verifyTransaction(transaction) {
+        return ChainUtil.verifySignature(transaction.input.address,
+                            transaction.input.signature,
+                            ChainUtil.hash(transaction.getOutputRecipient()));
+    }
+
     toString() {
         return `Transaction:
             id      : ${this.id}

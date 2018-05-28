@@ -1,5 +1,6 @@
 const Wallet = require('../wallet');
 const Transaction = require('./transaction');
+const ChainUtil = require('../../utils/chain_util');
 
 describe('Transaction', () => {
 
@@ -36,7 +37,22 @@ describe('Transaction', () => {
         expect(outRecipient.amountReceived).toEqual(amount);
     });
 
-    it('Transaction input amount equals sender balance', () => {
+    it('Transaction input current amount equals sender balance', () => {
         expect(transaction.input.currentAmount).toEqual(wallet1.balance);
+    });
+
+    it('Transaction input address equals senders public key', () => {
+        expect(transaction.input.address).toEqual(wallet1.publicKey);
+    });
+
+    it('Validates transaction signature', () => {
+       expect(Transaction.verifyTransaction(transaction))
+           .toBe(true);
+    });
+
+    it('Invalidates corrupt transaction', () => {
+        transaction.output.recipient.amountReceived = 60000;
+        expect(Transaction.verifyTransaction(transaction))
+            .toBe(false);
     });
 });

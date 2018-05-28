@@ -8,8 +8,8 @@ class Wallet {
         this.publicKey = this.keyPare.getPublic().encode('hex');
     }
 
-    sign(hashedData) {
-        return this.keyPare.sign(hashedData);
+    sign(hashData) {
+        return this.keyPare.sign(hashData);
     }
 
     toString() {
