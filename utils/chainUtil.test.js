@@ -7,20 +7,18 @@ describe('Transaction', () => {
     let wallet1,
         recipient,
         amount,
-        transaction;
+        transaction,
+        transaction2;
 
     beforeEach(() => {
         wallet1 = new Wallet();
         recipient = 'fsdag334g';
         amount = 30;
-        transaction = new Transaction(wallet1, recipient, amount);
-        Transaction.signTransaction(transaction, wallet1);
+        transaction = Transaction.newTransaction(wallet1, recipient, amount);
+        transaction2 = Transaction.newTransaction(wallet1, recipient, 10);
     });
 
     it('Invalidates unmatched hash', () => {
-        const originalTransaction = JSON.stringify(transaction.output);
-        transaction.output.recipient.amountReceived = 5000;
-        expect(ChainUtil.hash(transaction.getOutputRecipient())).not.toEqual(ChainUtil.hash(originalTransaction));
-
+        expect(ChainUtil.hash(transaction2.getOutput())).not.toEqual(ChainUtil.hash(transaction.getOutput()));
     });
 });

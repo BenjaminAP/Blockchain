@@ -3,19 +3,36 @@ const InDetails = require(`./input_details`);
 const ChainUtil = require('../../utils/chain_util');
 
 class Transaction {
-    constructor(senderWallet, recipient, amount) {
+    constructor() {
 
         this.id = ChainUtil.generateUID();
         this.input = null;
-        this.output = new OutDetails(senderWallet, recipient, amount);
+        this.output = [];
     }
 
     getOutputSender() {
-        return JSON.stringify(this.output.sender);
+        return this.output[this.output.length - 1].sender;
     }
 
     getOutputRecipient() {
-        return JSON.stringify(this.output.recipient);
+        return this.output[this.output.length - 1].recipient;
+    }
+
+    getOutput() {
+        return this.output[this.output.length - 1];
+    }
+
+    static newTransaction(senderWallet, recipient, amount) {
+
+        if (senderWallet.balance  < amount) {
+            console.log('Senders balance lower than amount send');
+            return;
+        }
+
+        const transaction = new this();
+
+        transaction.output.push(new OutDetails(senderWallet, recipient, amount));
+        return transaction;
     }
 
     static signTransaction(transaction, sendersWallet) {
@@ -25,30 +42,8 @@ class Transaction {
     static verifyTransaction(transaction) {
         return ChainUtil.verifySignature(transaction.input.address,
                             transaction.input.signature,
-                            ChainUtil.hash(transaction.getOutputRecipient()));
+                            ChainUtil.hash(transaction.getOutput()));
     }
-
-    toString() {
-        return `Transaction:
-            id      : ${this.id}
-            input   : ${this.input}
-            output  : ${this.output}`
-    }
-
-    // static newTransaction(senderWallet, recipient, amount) {
-    //
-    //     if (senderWallet.balance < amount){
-    //         console.log("Amount send larger than balance.");
-    //         return;
-    //     }
-    //
-    //     let transaction = new Transaction();
-    //     // const outDetails =
-    //
-    //     transaction.output = new OutDetails(senderWallet, recipient, amount);
-    //
-    //     return transaction;
-    // }
 
     toString() {
         return `Transaction :

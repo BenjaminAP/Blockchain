@@ -15,7 +15,7 @@ class ChainUtil {
     }
 
     static hash(dataToHash) {
-        return SHA256(dataToHash).toString();
+        return SHA256(JSON.stringify(dataToHash)).toString();
     }
 
     static verifySignature(publicKey, signature, hashData){

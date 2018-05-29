@@ -1,17 +1,12 @@
+const Sender = require('./sender');
+const Recipient = require('./recipient');
 //Details about transaction
 //--senders
 //--recipient
 class OutDetails {
     constructor(senderWallet, recipient, amount) {
-        this.sender = {
-            expectedBalance :  senderWallet.balance - amount,
-            address       : senderWallet.publicKey
-        };
-
-        this.recipient = {
-            amountReceived: amount,
-            address: recipient
-        };
+        this.sender = new Sender(senderWallet, amount);
+        this.recipient = new Recipient(amount, recipient);
     }
 
     toString() {
