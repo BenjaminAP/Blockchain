@@ -24,6 +24,7 @@ describe('Transaction', () => {
 
     it('Output sender has expected balance', () =>{
         const sender = transaction.getOutputSender();
+        console.log(sender.expectedBalance);
         expect(sender.expectedBalance).toEqual(wallet1.balance - amount);
     });
 
