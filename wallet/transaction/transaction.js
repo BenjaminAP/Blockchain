@@ -14,13 +14,6 @@ class Transaction {
         return this.output.sender;
     }
 
-    getOutputSenderByKey(publicKey) {
-        if (this.output.sender.address == publicKey) {
-            return this.output.sender;
-        }
-        return;
-    }
-
     getOutputRecipient(recipient) {
 
         for (let i = 0; i < this.output.recipient.length; i++) {
