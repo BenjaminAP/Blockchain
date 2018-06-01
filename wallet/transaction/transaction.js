@@ -7,19 +7,31 @@ class Transaction {
 
         this.id = ChainUtil.generateUID();
         this.input = null;
-        this.output = [];
+        this.output = null;
     }
 
     getOutputSender() {
-        return this.output[this.output.length - 1].sender;
+        return this.output.sender;
     }
 
-    getOutputRecipient() {
-        return this.output[this.output.length - 1].recipient;
+    getOutputSenderByKey(publicKey) {
+        if (this.output.sender.address == publicKey) {
+            return this.output.sender;
+        }
+        return;
+    }
+
+    getOutputRecipient(recipient) {
+
+        for (let i = 0; i < this.output.recipient.length; i++) {
+            if (this.output.recipient[i].address === recipient) {
+                return this.output.recipient[i];
+            }
+        }
     }
 
     getOutput() {
-        return this.output[this.output.length - 1];
+        return this.output;
     }
 
     static newTransaction(senderWallet, recipient, amount) {
@@ -31,7 +43,7 @@ class Transaction {
 
         const transaction = new this();
 
-        transaction.output.push(new OutDetails(senderWallet, recipient, amount));
+        transaction.output = new OutDetails(senderWallet, recipient, amount);
         return transaction;
     }
 
@@ -43,6 +55,26 @@ class Transaction {
         return ChainUtil.verifySignature(transaction.input.address,
                             transaction.input.signature,
                             ChainUtil.hash(transaction.getOutput()));
+    }
+
+    updateTransaction(senderWallet, recipient, amount) {
+
+        if (this.output.sender.address !== senderWallet.publicKey) {
+            console.log(`Incorrect transaction being updated`);
+            return;
+        }
+
+        if (this.output.sender.expectedBalance < amount) {
+            console.log(`Amount larger than balance`);
+            return;
+        }
+
+        this.output.sender.expectedBalance = this.output.sender.expectedBalance - amount;
+
+        this.output.addRecipient(amount, recipient);
+        Transaction.signTransaction(this, senderWallet);
+
+        return this;
     }
 
     toString() {

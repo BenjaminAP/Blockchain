@@ -28,12 +28,12 @@ describe('Transaction', () => {
     });
 
     it('Output recipient address correct', () => {
-        const outRecipient = transaction.getOutputRecipient();
+        const outRecipient = transaction.getOutputRecipient(recipient);
         expect(outRecipient.address).toEqual(recipient);
     });
 
     it('Output recipient amount received correct', () => {
-        const outRecipient = transaction.getOutputRecipient();
+        const outRecipient = transaction.getOutputRecipient(recipient);
         expect(outRecipient.amountReceived).toEqual(amount);
     });
 
@@ -51,7 +51,7 @@ describe('Transaction', () => {
     });
 
     it('Invalidates corrupt transaction', () => {
-        transaction.output[transaction.output.length - 1].recipient.amountReceived = 60000;
+        transaction.output.recipient[0].amountReceived = 60000;
         expect(Transaction.verifyTransaction(transaction))
             .toBe(false);
     });

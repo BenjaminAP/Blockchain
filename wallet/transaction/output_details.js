@@ -6,8 +6,13 @@ const Recipient = require('./recipient');
 class OutDetails {
     constructor(senderWallet, recipient, amount) {
         this.sender = new Sender(senderWallet, amount);
-        this.recipient = new Recipient(amount, recipient);
+        this.recipient = [new Recipient(amount, recipient)];
     }
+
+    addRecipient(amount, recipient) {
+        this.recipient.push(new Recipient(amount, recipient));
+    }
+
 
     toString() {
         return `OutDetails :
