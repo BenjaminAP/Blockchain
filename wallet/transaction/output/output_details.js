@@ -6,18 +6,18 @@ const Recipient = require('./recipient');
 class OutDetails {
     constructor(senderWallet, recipient, amount) {
         this.sender = new Sender(senderWallet, amount);
-        this.recipient = [new Recipient(amount, recipient)];
+        this.recipients = [new Recipient(amount, recipient)];
     }
 
     addRecipient(amount, recipient) {
-        this.recipient.push(new Recipient(amount, recipient));
+        this.recipients.push(new Recipient(amount, recipient));
     }
 
 
     toString() {
         return `OutDetails :
                     sender : ${JSON.stringify(this.sender)}
-                    recipient: ${JSON.stringify(this.recipient)}`;
+                    recipient: ${JSON.stringify(this.recipients)}`;
     }
 }
 

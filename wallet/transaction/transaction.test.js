@@ -51,8 +51,26 @@ describe('Transaction', () => {
     });
 
     it('Invalidates corrupt transaction', () => {
-        transaction.output.recipient[0].amountReceived = 60000;
+        transaction.output.recipients[0].amountReceived = 60000;
         expect(Transaction.verifyTransaction(transaction))
             .toBe(false);
+    });
+
+    describe('Updating transaction', () => {
+       let nextAmount, nextRecipient;
+       beforeEach(() => {
+          nextAmount = 15;
+          nextRecipient = 'asdf-erwt45-2345wedf'
+           transaction = transaction.updateTransaction(wallet1, nextRecipient, nextAmount);
+       });
+
+       it('Amount subtracted from sender in output', () => {
+            expect(transaction.output.sender.expectedBalance).toEqual(wallet1.balance - amount - nextAmount);
+        });
+
+       it('Next transaction amount correct', () => {
+           const recipient = transaction.getOutputRecipient(nextRecipient);
+          expect(recipient.amountReceived).toEqual(nextAmount);
+       });
     });
 });

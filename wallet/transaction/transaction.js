@@ -1,4 +1,4 @@
-const OutDetails = require(`./output_details`);
+const OutDetails = require(`./output/output_details`);
 const InDetails = require(`./input_details`);
 const ChainUtil = require('../../utils/chain_util');
 
@@ -14,11 +14,11 @@ class Transaction {
         return this.output.sender;
     }
 
-    getOutputRecipient(recipient) {
+    getOutputRecipient(recipientAddress) {
 
-        for (let i = 0; i < this.output.recipient.length; i++) {
-            if (this.output.recipient[i].address === recipient) {
-                return this.output.recipient[i];
+        for (let i = 0; i < this.output.recipients.length; i++) {
+            if (this.output.recipients[i].address === recipientAddress) {
+                return this.output.recipients[i];
             }
         }
     }
