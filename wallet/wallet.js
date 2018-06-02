@@ -1,4 +1,5 @@
 const ChainUtil = require('../utils/chain_util');
+const Transaction = require('../wallet/transaction/transaction');
 const { INIT_BALANCE } =  require('../config');
 
 class Wallet {
@@ -10,6 +11,26 @@ class Wallet {
 
     sign(hashData) {
         return this.keyPare.sign(hashData);
+    }
+
+    createTransaction(recipient, amount, tPool) {
+
+        if (amount > this.balance) {
+            console.log(`Amount larger than balance. Can't process`);
+        }
+
+        let transaction = tPool.getExistingTransactionFromAddress(this.publicKey);
+
+        if (transaction) {
+            transaction = transaction.updateTransaction(this, recipient, amount);
+        } else {
+            transaction = Transaction.newTransaction(this, recipient, amount);
+            Transaction.signTransaction(transaction, this);
+        }
+
+        tPool.updateAddTransaction(transaction);
+
+        return transaction;
     }
 
     toString() {
