@@ -23,7 +23,7 @@ class TransactionPool {
         return;
     }
 
-    getExistingTransactionFromAddress(senderAddress) {
+    getTransactionFromAddress(senderAddress) {
         for (let i = 0; i < this.transactions.length; i++) {
             if (this.transactions[i].sender.address === senderAddress) {
                 return this.transactions[i];
