@@ -3,19 +3,17 @@ const TransactionPool = require('../wallet/transactionPool/transactionPool');
 
 describe('Wallet Test', () => {
 
-    let wallet,
-        tPool,
-        recipient,
-        amount,
-        transaction;
+    const wallet = new Wallet();
+    const recipient = 'reci-pient';
+    const amount = 30;
+    const tPool =  new TransactionPool();
+    let transaction;
+
+    wallet.createTransaction(recipient, amount, tPool);
 
     describe('First Transaction', () => {
+
         beforeEach(() => {
-            wallet = new Wallet();
-            recipient = 'reci-pient';
-            amount = 30;
-            tPool =  new TransactionPool();
-            transaction = wallet.createTransaction(recipient, amount, tPool);
             transaction = tPool.getTransactionByAddress(wallet.publicKey);
         });
 
@@ -30,7 +28,7 @@ describe('Wallet Test', () => {
         describe('Another Transaction', () => {
 
             beforeEach(() => {
-                transaction = wallet.createTransaction(recipient, amount, tPool);
+                wallet.createTransaction(recipient, amount, tPool);
                 transaction = tPool.getTransactionByAddress(wallet.publicKey);
             });
 
