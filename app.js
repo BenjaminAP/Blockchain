@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const P2PServer = require('./P2pServer');
+const Wallet = require('./wallet/wallet');
+const TransactionPool = require('./wallet/transactionPool/transactionPool');
 
 const Block = require('./blockchain/block');
 
@@ -10,7 +12,8 @@ const app = express();
 app.use(bodyParser.json());
 
 const p2pServer = new P2PServer();
-
+let transactionPool = new TransactionPool();
+let wallet = new Wallet();
 
 app.use(express.static(__dirname + '/'));
 
@@ -32,6 +35,16 @@ app.get('/', (req, res) => {
 
 app.get('/blockchain', (req, res) => {
     res.json(p2pServer.blockchain.chain);
+});
+
+app.get('/transactions', (req, res) => {
+   res.json(transactionPool);
+});
+
+app.post('/transaction', (req, res) => {
+    const data = req.body.tData;
+    const transaction = wallet.createTransaction(data.recipient, data.amount, transactionPool);
+    res.json(transaction);
 });
 
 app.post('/mine', (req, res) => {
