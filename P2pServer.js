@@ -1,5 +1,6 @@
 const WebSocket = require('ws');
 const Blockchain = require('./blockchain/blockchain');
+const TransactionPool = require('./wallet/transactionPool/transactionPool');
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
@@ -7,6 +8,7 @@ const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 class P2pServer {
     constructor() {
         this.blockchain = new Blockchain();
+        this.tPool = new TransactionPool();
         this.sockets = [];
     }
 
@@ -64,6 +66,16 @@ class P2pServer {
     syncBlockchain() {
         this.sockets.forEach(socket => {
            socket.send(this.sendBlockchain());
+        });
+    }
+
+    sendTransaction(socket, transaction) {
+        socket.send(JSON.stringify(transaction));
+    }
+
+    syncTransactionPool(transaction) {
+        this.sockets.forEach(socket => {
+           this.sendTransaction(socket, transaction);
         });
     }
 }
