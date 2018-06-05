@@ -23,16 +23,15 @@ class TransactionPool {
         return;
     }
 
-    getTransactionFromAddress(senderAddress) {
+    getTransactionByAddress(senderAddress) {
         for (let i = 0; i < this.transactions.length; i++) {
-            if (this.transactions[i].sender.address === senderAddress) {
+            if (this.transactions[i].getInputAddress() === senderAddress) {
                 return this.transactions[i];
             }
         }
 
-        return;
+        return null;
     }
-
 
     updateAddTransaction(newTransaction) {
         let transactionIndex = this.getTransactionIndexById(newTransaction.id);

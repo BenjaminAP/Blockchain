@@ -23,8 +23,7 @@ describe('Transaction', () => {
     });
 
     it('Output sender has expected balance', () =>{
-        const sender = transaction.getOutputSender();
-        expect(sender.expectedBalance).toEqual(wallet1.balance - amount);
+        expect(transaction.getSenderExpectedBalance()).toEqual(wallet1.balance - amount);
     });
 
     it('Output recipient address correct', () => {

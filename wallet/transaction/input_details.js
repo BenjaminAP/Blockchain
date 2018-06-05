@@ -9,6 +9,10 @@ class InputDetail {
         this.address = senderWallet.publicKey;
         this.signature = senderWallet.sign(ChainUtil.hash(transaction.getOutput()));
     }
+
+    getAddress() {
+        return this.address;
+    }
 }
 
 module.exports = InputDetail;

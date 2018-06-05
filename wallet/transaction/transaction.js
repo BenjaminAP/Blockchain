@@ -14,6 +14,14 @@ class Transaction {
         return this.output.sender;
     }
 
+    getSenderExpectedBalance() {
+        return this.output.sender.getExpectedBalance();
+    }
+
+    getInputAddress() {
+        return this.input.getAddress();
+    }
+
     getOutputRecipient(recipientAddress) {
 
         for (let i = 0; i < this.output.recipients.length; i++) {
