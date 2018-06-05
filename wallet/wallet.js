@@ -19,7 +19,7 @@ class Wallet {
             console.log(`Amount larger than balance. Can't process`);
         }
 
-        let transaction = tPool.getTransactionFromAddress(this.publicKey);
+        let transaction = tPool.getTransactionByAddress(this.publicKey);
 
         if (transaction) {
             transaction = transaction.updateTransaction(this, recipient, amount);
