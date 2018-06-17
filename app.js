@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const P2PServer = require('./P2pServer');
+const P2PServer = require('./P2pServer/P2pServer');
 const Wallet = require('./wallet/wallet');
 const TransactionPool = require('./wallet/transactionPool/transactionPool');
 

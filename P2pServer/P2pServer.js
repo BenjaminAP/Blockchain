@@ -1,6 +1,8 @@
 const WebSocket = require('ws');
-const Blockchain = require('./blockchain/blockchain');
-const TransactionPool = require('./wallet/transactionPool/transactionPool');
+const Blockchain = require('../blockchain/blockchain');
+const TransactionPool = require('../wallet/transactionPool/transactionPool');
+const Message = require('./Message');
+const { MSG_TYPE } = require('../config');
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
@@ -10,6 +12,7 @@ class P2pServer {
         this.blockchain = new Blockchain();
         this.tPool = new TransactionPool();
         this.sockets = [];
+        this.msg;
     }
 
     listen() {
@@ -25,7 +28,7 @@ class P2pServer {
     connectSocket(socket) {
         this.msgHandler(socket);
         this.sockets.push(socket);
-        socket.send(this.sendBlockchain());
+        socket.send(this.sendChain());
     }
 
     connectToPeers() {
@@ -41,8 +44,21 @@ class P2pServer {
 
     msgHandler(socket) {
         socket.on('message', (msg) => {
-            const chain = JSON.parse(msg);
-            this.blockchain.replaceChain(chain);
+
+            const data = JSON.parse(msg.data);
+
+            switch (msg.type) {
+                case MSG_TYPE.chain:
+                    this.blockchain.replaceChain(data);
+                    break;
+                case MSG_TYPE.transaction:
+                    this.tPool.updateAddTransaction(data);
+                    break;
+                default:
+                    break;
+            }
+
+
         });
     }
 
@@ -55,8 +71,9 @@ class P2pServer {
         });
     }
 
-    sendBlockchain() {
-        return JSON.stringify(this.blockchain.chain);
+    sendChain() {
+        this.msg = new Messege(MSG_TYPE.chain, this.blockchain.chain);
+        return JSON.stringify(this.msg);
     }
 
     addBlock(data, responce) {
@@ -65,12 +82,13 @@ class P2pServer {
 
     syncBlockchain() {
         this.sockets.forEach(socket => {
-           socket.send(this.sendBlockchain());
+           socket.send(this.sendChain());
         });
     }
 
     sendTransaction(socket, transaction) {
-        socket.send(JSON.stringify(transaction));
+        this.msg = new Message(MSG_TYPE.transaction, transaction);
+        socket.send(JSON.stringify(this.msg));
     }
 
     syncTransactionPool(transaction) {
