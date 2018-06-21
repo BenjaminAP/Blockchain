@@ -45,14 +45,14 @@ class P2pServer {
     msgHandler(socket) {
         socket.on('message', (msg) => {
 
-            const data = JSON.parse(msg.data);
+            const parseMsg = JSON.parse(msg);
 
-            switch (msg.type) {
+            switch (parseMsg.type) {
                 case MSG_TYPE.chain:
-                    this.blockchain.replaceChain(data);
+                    this.blockchain.replaceChain(parseMsg.data);
                     break;
                 case MSG_TYPE.transaction:
-                    this.tPool.updateAddTransaction(data);
+                    this.tPool.updateAddTransaction(parseMsg.data);
                     break;
                 default:
                     break;
@@ -72,7 +72,7 @@ class P2pServer {
     }
 
     sendChain() {
-        this.msg = new Messege(MSG_TYPE.chain, this.blockchain.chain);
+        this.msg = new Message(MSG_TYPE.chain, this.blockchain.chain);
         return JSON.stringify(this.msg);
     }
 
@@ -88,7 +88,7 @@ class P2pServer {
 
     sendTransaction(socket, transaction) {
         this.msg = new Message(MSG_TYPE.transaction, transaction);
-        socket.send(JSON.stringify(this.msg));
+        socket.send(this.msg);
     }
 
     syncTransactionPool(transaction) {
