@@ -64,7 +64,7 @@ class P2pServer {
 
     sendMsg(msg) {
         this.sockets.forEach(peer => {
-            // if ((peer.readyState === WebSocket.OPEN) && (peer !== peers[0])) {
+             // if ((peer.readyState === WebSocket.OPEN) && (peer !== peers[0])) {
             if (peer.readyState === WebSocket.OPEN) {
                 peer.send(JSON.stringify(msg));
             }
@@ -88,7 +88,11 @@ class P2pServer {
 
     sendTransaction(socket, transaction) {
         this.msg = new Message(MSG_TYPE.transaction, transaction);
-        socket.send(this.msg);
+        socket.send(JSON.stringify(this.msg));
+    }
+
+    getTransactions() {
+        return this.tPool;
     }
 
     syncTransactionPool(transaction) {

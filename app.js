@@ -38,19 +38,21 @@ app.get('/blockchain', (req, res) => {
 });
 
 app.get('/transactions', (req, res) => {
-   res.json(transactionPool);
+   res.json(p2pServer.getTransactions());
 });
 
 app.post('/transaction', (req, res) => {
     const data = req.body.tData;
     const transaction = wallet.createTransaction(data.recipient, data.amount, transactionPool);
+    p2pServer.tPool.updateAddTransaction(transaction);
+    p2pServer.syncTransactionPool(transaction);
     res.json(transaction);
 });
 
 app.post('/mine', (req, res) => {
     const data = req.body.data;
     const block = p2pServer.addBlock(data);
-    p2pServer.syncBlockchain()
+    p2pServer.syncBlockchain();
 
     res.redirect('/blockchain');
 });
