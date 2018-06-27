@@ -1,0 +1,13 @@
+
+class Miner {
+    constructor(blockchain, p2pServer, tPool, wallet) {
+        this.blockchain = blockchain;
+        this.p2pServer = p2pServer;
+        this.tPool = tPool;
+        this.wallet = wallet;
+    }
+
+    mine() {
+
+    }
+}
