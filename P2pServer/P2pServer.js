@@ -19,7 +19,6 @@ class P2pServer {
         const wss = new WebSocket.Server({port : P2P_PORT});
 
         wss.on('connection', ws => {
-            console.log(ws);
             this.connectSocket(ws);
         });
 
