@@ -33,6 +33,10 @@ app.get('/', (req, res) => {
 //     res.json({"test" : "some Responce"});
 // });
 
+app.get('/connected_peers', (req, res) => {
+   res.json(JSON.stringify(p2pServer.getConnectedPeers()));
+});
+
 app.get('/blockchain', (req, res) => {
     res.json(p2pServer.blockchain.chain);
 });

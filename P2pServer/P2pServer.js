@@ -19,6 +19,7 @@ class P2pServer {
         const wss = new WebSocket.Server({port : P2P_PORT});
 
         wss.on('connection', ws => {
+            console.log(ws);
             this.connectSocket(ws);
         });
 
@@ -60,6 +61,16 @@ class P2pServer {
 
 
         });
+    }
+
+    getConnectedPeers() {
+
+        let peersConnectedPort = [];
+        this.sockets.forEach(socket => {
+            peersConnectedPort.push(socket._socket._server);
+        });
+
+        return peersConnectedPort;
     }
 
     sendMsg(msg) {
