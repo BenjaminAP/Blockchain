@@ -66,9 +66,6 @@ export class BlockchainComponent implements OnInit {
     // console.log(this.chain);
     this.blockchain = new Blockchain(this.chain);
 
-    // this.chain.forEach(( block: Block) => {
-    //   console.log(block.toString());
-    // });
   }
 
 }

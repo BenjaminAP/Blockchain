@@ -6,21 +6,20 @@ import { AppComponent } from './app.component';
 import { BlockchainComponent } from './blockchain/blockchain.component';
 import { HeaderComponent } from './header/header.component';
 import { BlockComponent } from './blockchain/block/block.component';
-import { KeyValuePipe } from './pipes/keyValue/key-value.pipe';
+// import { KeyValuePipe } from './pipes/keyValue/key-value.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlockchainComponent,
     HeaderComponent,
-    BlockComponent,
-    KeyValuePipe
+    BlockComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [KeyValuePipe],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

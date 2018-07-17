@@ -2,23 +2,6 @@
 <div>
   <!--<p>{{block.key}} : {{block.value}} </p>-->
   <div class="container" *ngFor="let block of blockchain.chain">
-    <table class="table">
-      <tr>
-        <th>TimeStamp</th>
-        <th>Prev Hash</th>
-        <th>Hash</th>
-        <th>Difficulty</th>
-        <th>Nonce</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>{{block.timestamp}}</td>
-        <td>{{block.prevHash}}</td>
-        <td>{{block.hash}}</td>
-        <td>{{block.difficulty}}</td>
-        <td>{{block.nonce}}</td>
-        <td>{{block.data}}</td>
-      </tr>
-    </table>
+    <app-block [block]="block"></app-block>
   </div>
 </div>
