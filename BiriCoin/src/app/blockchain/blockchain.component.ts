@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Blockchain} from "../classes/blockchain";
 import {Block} from "../classes/block";
-import {childOfKind} from "tslint";
 
 @Component({
   selector: 'app-blockchain',
@@ -65,10 +64,11 @@ export class BlockchainComponent implements OnInit {
     }
 
     // console.log(this.chain);
+    this.blockchain = new Blockchain(this.chain);
 
-    this.chain.forEach(( block: Block) => {
-      console.log(block.toString());
-    });
+    // this.chain.forEach(( block: Block) => {
+    //   console.log(block.toString());
+    // });
   }
 
 }

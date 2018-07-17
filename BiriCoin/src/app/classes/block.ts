@@ -82,7 +82,6 @@ export class Block {
       hash: ${this._hash}
       nonce: ${this._nonce}
       difficulty: ${this._difficulty}
-      data: ${this._data}
-    `
+      data: ${this._data}`
   }
 }
