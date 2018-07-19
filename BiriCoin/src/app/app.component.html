@@ -1,8 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-header (tabSelected)="onTabSelected($event)"></app-header>
+<div class="container">
+  <h3>
+    <label> {{showTab | titlecase }}</label>
+  </h3>
+  <hr>
+  <app-blockchain *ngIf="showTab === 'blockchain'"></app-blockchain>
+  <app-wallet *ngIf="showTab === 'wallet'"></app-wallet>
+</div>
 
-<app-blockchain *ngIf="showTab === 'blockchain'"></app-blockchain>
-<app-wallet *ngIf="showTab === 'wallet'"></app-wallet>
+
+
+
 
 
 

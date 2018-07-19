@@ -9,6 +9,7 @@ import { BlockchainComponent } from './blockchain/blockchain.component';
 import { BlockComponent } from './blockchain/block/block.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import {TitleCasePipe} from "@angular/common";
 // import { KeyValuePipe } from './pipes/keyValue/key-value.pipe';
 
 @NgModule({
@@ -24,7 +25,7 @@ import { TransactionComponent } from './transaction/transaction.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [TitleCasePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule{
