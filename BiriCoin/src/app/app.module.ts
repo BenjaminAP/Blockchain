@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { BlockchainComponent } from './blockchain/blockchain.component';
 import { BlockComponent } from './blockchain/block/block.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { TransactionComponent } from './transaction/transaction.component';
 // import { KeyValuePipe } from './pipes/keyValue/key-value.pipe';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { WalletComponent } from './wallet/wallet.component';
     BlockchainComponent,
     HeaderComponent,
     BlockComponent,
-    WalletComponent
+    WalletComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
