@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'BiriCoin Blockchain';
+export class AppComponent implements OnInit{
+  showTab: string;
+
+  constructor() {
+
+    this.showTab = 'blockchain';
+  }
+
+  ngOnInit() {
+  }
+
+  onTabSelected(tabName: string) {
+    this.showTab = tabName;
+  }
 }

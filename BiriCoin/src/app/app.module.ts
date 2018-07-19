@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 
-import { AppComponent } from './app.component';
+
 import { BlockchainComponent } from './blockchain/blockchain.component';
 import { HeaderComponent } from './header/header.component';
 import { BlockComponent } from './blockchain/block/block.component';
+import { AppComponent } from './app.component';
+import { WalletComponent } from './wallet/wallet.component';
 // import { KeyValuePipe } from './pipes/keyValue/key-value.pipe';
 
 @NgModule({
@@ -13,7 +15,8 @@ import { BlockComponent } from './blockchain/block/block.component';
     AppComponent,
     BlockchainComponent,
     HeaderComponent,
-    BlockComponent
+    BlockComponent,
+    WalletComponent
   ],
   imports: [
     BrowserModule,
@@ -22,4 +25,6 @@ import { BlockComponent } from './blockchain/block/block.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule{
+
+}
