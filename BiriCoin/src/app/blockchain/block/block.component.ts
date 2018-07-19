@@ -11,11 +11,9 @@ export class BlockComponent implements OnInit {
   @Input() block: Block;
 
   constructor() {
-    console.log(this.block);
   }
 
   ngOnInit() {
-    console.log(this.block);
   }
 
 }

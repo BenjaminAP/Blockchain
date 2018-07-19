@@ -61,6 +61,10 @@ app.post('/mine', (req, res) => {
     res.redirect('/blockchain');
 });
 
+app.get('/wallet', (req, res) => {
+    res.json(JSON.stringify(wallet));
+});
+
 
 
 p2pServer.listen();
