@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import {RouterModule, Routes} from "@angular/router";
 
 //COMPONENTS------------------------------------------------------------------------------------------------------------
 import { AppComponent } from './app.component';
@@ -16,6 +17,20 @@ import { BlockchainService } from "./service/blockchain/blockchain.service";
 //DIRECTIVES------------------------------------------------------------------------------------------------------------
 import { TitleCasePipe } from "@angular/common";
 
+const appRouter: Routes = [
+  {
+    path: '',
+    component: BlockchainComponent
+  },
+  {
+    path: 'blockchain',
+    component: BlockchainComponent
+  },
+  {
+    path: 'wallet',
+    component: WalletComponent
+  }
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +42,8 @@ import { TitleCasePipe } from "@angular/common";
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRouter)
   ],
   providers: [TitleCasePipe, BlockchainService],
   bootstrap: [AppComponent]

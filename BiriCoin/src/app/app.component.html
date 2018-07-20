@@ -5,8 +5,9 @@
     <label> {{showTab | titlecase }}</label>
   </h3>
   <hr>
-  <app-blockchain *ngIf="showTab === 'blockchain'"></app-blockchain>
-  <app-wallet *ngIf="showTab === 'wallet'"></app-wallet>
+  <!--<app-blockchain *ngIf="showTab === 'blockchain'"></app-blockchain>-->
+  <!--<app-wallet *ngIf="showTab === 'wallet'"></app-wallet>-->
+  <router-outlet></router-outlet>
 </div>
 
 
