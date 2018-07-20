@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+
   selectTab(tabName: string)  {
     this.tabSelected.emit(tabName);
     console.log(tabName);
