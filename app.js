@@ -65,6 +65,10 @@ app.get('/wallet', (req, res) => {
     res.json(JSON.stringify(wallet));
 });
 
-
+app.get('/wallet/transactions', (req, res) => {
+    // let senderAddress = req.params['senderAddress'];
+    //use senderAddress instead of wallet.publicKey
+    res.json(p2pServer.getTransactionsByAddress(wallet.publicKey));
+});
 
 p2pServer.listen();

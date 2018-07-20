@@ -28,4 +28,5 @@ describe('Transaction Pool', () => {
 
         expect(JSON.stringify(transactionPool.getTransactionById(oldTransaction.id))).toEqual(JSON.stringify(newTransaction));
     });
+
 });

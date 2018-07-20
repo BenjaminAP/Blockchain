@@ -4,13 +4,13 @@ import {FormsModule} from "@angular/forms";
 
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { BlockchainComponent } from './blockchain/blockchain.component';
-import { BlockComponent } from './blockchain/block/block.component';
-import { WalletComponent } from './wallet/wallet.component';
-import { TransactionComponent } from './transaction/transaction.component';
-import {TitleCasePipe} from "@angular/common";
-// import { KeyValuePipe } from './pipes/keyValue/key-value.pipe';
+import { HeaderComponent } from './components/header/header.component';
+import { BlockchainComponent } from './components/blockchain/blockchain.component';
+import { BlockComponent } from './components/blockchain/block/block.component';
+import { WalletComponent } from './components/wallet/wallet.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
+import { BlockchainService } from "./service/blockchain/blockchain.service";
+import { TitleCasePipe } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import {TitleCasePipe} from "@angular/common";
     BrowserModule,
     FormsModule
   ],
-  providers: [TitleCasePipe],
+  providers: [TitleCasePipe, BlockchainService],
   bootstrap: [AppComponent]
 })
 export class AppModule{

@@ -110,6 +110,10 @@ class P2pServer {
            this.sendTransaction(socket, transaction);
         });
     }
+
+    getTransactionsByAddress(address) {
+        return this.tPool.getTransactionByAddress(address);
+    }
 }
 
 
