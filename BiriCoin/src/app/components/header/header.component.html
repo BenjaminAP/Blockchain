@@ -1,9 +1,26 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active" (click)="selectTab('blockchain')"><a routerLink="blockchain">Blockchain</a></li>
-      <li role="presentation" (click)="selectTab('wallet')"><a routerLink="wallet">Wallet</a></li>
-      <!--<li role="presentation" (click)="selectTab('network')"><a href="#network">Network</a></li>-->
+
+      <li role="presentation"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          (click)="selectTab('home')">
+        <a routerLink="/">Home</a>
+      </li>
+
+      <li role="presentation"
+          routerLinkActive="active"
+          (click)="selectTab('blockchain')">
+        <a routerLink="blockchain">Blockchain</a>
+      </li>
+
+      <li role="presentation"
+          routerLinkActive="active"
+          (click)="selectTab('wallet')">
+        <a routerLink="wallet">Wallet</a>
+      </li>
+
     </ul>
   </div>
 </nav>
