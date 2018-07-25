@@ -3,7 +3,7 @@
     <div class="card-header">
       <label>Details</label>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="wallet">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           Public Key:{{wallet.publicKey}}
