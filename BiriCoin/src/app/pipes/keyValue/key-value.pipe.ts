@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Block} from "../../classes/block";
+import {Block} from "../../models/block";
 
 @Pipe({
   name: 'keyValue'

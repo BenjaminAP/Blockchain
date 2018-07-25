@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Wallet} from "../../classes/wallet";
+import {Wallet} from "../../models/wallet";
 import {WalletService} from "../../service/wallet/wallet.service";
 
 @Component({

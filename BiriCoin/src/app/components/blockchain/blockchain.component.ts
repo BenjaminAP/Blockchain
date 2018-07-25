@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Blockchain} from "../../classes/blockchain";
+import {Blockchain} from "../../models/blockchain";
 import {BlockchainService} from "../../service/blockchain/blockchain.service";
 
 @Component({

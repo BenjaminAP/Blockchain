@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import {Block} from "../../classes/block";
-import {Blockchain} from "../../classes/blockchain";
+import {Block} from "../../models/block";
+import {Blockchain} from "../../models/blockchain";
 
 @Injectable({
   providedIn: 'root'
