@@ -6,10 +6,10 @@ export class Wallet {
   private _keyPare: object;
   private _publicKey: string;
 
-  constructor(balance: number, keyPare: object, publicKey: string) {
-    this._balance = balance;
-    this._keyPare = keyPare;
-    this._publicKey = publicKey;
+  constructor(walletObj) {
+    this._balance = walletObj.balance;
+    this._keyPare = walletObj.keyPare;
+    this._publicKey = walletObj.publicKey;
   }
 
   get balance(): number {

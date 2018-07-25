@@ -13,7 +13,7 @@ export class WalletComponent implements OnInit {
   wallet: Wallet;
 
   constructor(private walletService: WalletService) {
-    this.wallet =  new Wallet(walletService.getWalletBalance(), walletService.getWalletKeyPare(), walletService.getWalletPublicKey());
+    // this.wallet =  new Wallet(walletService.getWalletBalance(), walletService.getWalletKeyPare(), walletService.getWalletPublicKey());
   }
 
   ngOnInit() {
@@ -22,8 +22,8 @@ export class WalletComponent implements OnInit {
   getWalletDetails() {
     this.walletService.getWalletDetails().subscribe(
       (response) => {
-        let tempData = JSON.stringify(response);
-        console.log(tempData);
+        this.wallet = new Wallet(response);
+        console.log(this.wallet);
       },
       (error) => {
         console.error(error);
