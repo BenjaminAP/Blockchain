@@ -10,7 +10,7 @@ export class AppComponent implements OnInit{
 
   constructor() {
 
-    this.showTab = 'blockchain';
+    this.showTab = 'wallet';
   }
 
   ngOnInit() {

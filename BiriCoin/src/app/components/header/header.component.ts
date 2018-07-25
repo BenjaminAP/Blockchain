@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
 
   selectTab(tabName: string)  {
     this.tabSelected.emit(tabName);
-    console.log(tabName);
   }
 
 }
