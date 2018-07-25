@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Wallet} from "../../models/wallet";
 import {WalletService} from "../../service/wallet/wallet.service";
+import {Response} from "@angular/http";
 
 @Component({
   selector: 'app-wallet',
@@ -16,6 +17,18 @@ export class WalletComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getWalletDetails() {
+    this.walletService.getWalletDetails().subscribe(
+      (response) => {
+        let tempData = JSON.stringify(response);
+        console.log(tempData);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
 }

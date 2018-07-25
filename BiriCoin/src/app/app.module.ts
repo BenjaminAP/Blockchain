@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
 
 //COMPONENTS------------------------------------------------------------------------------------------------------------
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { TransactionComponent } from './components/transaction/transaction.compo
 
 //SERVICES--------------------------------------------------------------------------------------------------------------
 import { BlockchainService } from "./service/blockchain/blockchain.service";
+import {WalletService} from "./service/wallet/wallet.service";
 
 //DIRECTIVES------------------------------------------------------------------------------------------------------------
 import { TitleCasePipe } from "@angular/common";
@@ -43,9 +45,10 @@ const appRouter: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRouter)
+    RouterModule.forRoot(appRouter),
+    HttpClientModule
   ],
-  providers: [TitleCasePipe, BlockchainService],
+  providers: [TitleCasePipe, BlockchainService, WalletService],
   bootstrap: [AppComponent]
 })
 export class AppModule{
