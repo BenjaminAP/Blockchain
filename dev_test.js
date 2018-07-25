@@ -1,5 +1,5 @@
-const Transaction = require('./wallet/transaction/transaction');
-const Wallet = require('./wallet/wallet');
+const Transaction = require('./BlockchainREST/transaction/transaction');
+const Wallet = require('./BlockchainREST/wallet/wallet');
 
 let wallet_1 = new Wallet();
 

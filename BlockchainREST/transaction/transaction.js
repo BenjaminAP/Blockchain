@@ -1,6 +1,6 @@
 const OutDetails = require(`./output/output_details`);
 const InDetails = require(`./input_details`);
-const ChainUtil = require('../../utils/chain_util');
+const ChainUtil = require('../utils/chain_util');
 
 class Transaction {
     constructor() {

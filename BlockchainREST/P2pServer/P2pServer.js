@@ -1,8 +1,8 @@
 const WebSocket = require('ws');
 const Blockchain = require('../blockchain/blockchain');
-const TransactionPool = require('../wallet/transactionPool/transactionPool');
+const TransactionPool = require('../transactionPool/transactionPool');
 const Message = require('./Message');
-const { MSG_TYPE } = require('../config');
+const { MSG_TYPE } = require('../../config');
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];

@@ -1,6 +1,6 @@
-const Wallet = require('../wallet');
+const Wallet = require('../wallet/wallet');
 const Transaction = require('./transaction');
-const ChainUtil = require('../../utils/chain_util');
+const ChainUtil = require('../utils/chain_util');
 
 describe('Transaction', () => {
 

@@ -1,4 +1,4 @@
-const ChainUtil = require('../../utils/chain_util');
+const ChainUtil = require('../utils/chain_util');
 
 
 //Details about sender
