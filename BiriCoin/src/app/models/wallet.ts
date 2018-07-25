@@ -7,9 +7,12 @@ export class Wallet {
   private _publicKey: string;
 
   constructor(walletObj) {
-    this._balance = walletObj.balance;
-    this._keyPare = walletObj.keyPare;
-    this._publicKey = walletObj.publicKey;
+    
+    let temp = JSON.parse(walletObj);
+
+    this._balance = temp.balance;
+    this._keyPare = temp.keyPare;
+    this._publicKey = temp.publicKey;
   }
 
   get balance(): number {
