@@ -1,5 +1,5 @@
 const ChainUtil = require('../utils/chain_util');
-const { DIFFICULTY, MINE_RATE } = require('../../config');
+const { DIFFICULTY, MINE_RATE } = require('../config');
 
 class Block {
     constructor(timestamp, prevHash, hash, nonce, difficulty, data) {
