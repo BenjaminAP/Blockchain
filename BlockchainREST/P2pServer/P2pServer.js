@@ -57,8 +57,6 @@ class P2pServer {
                 default:
                     break;
             }
-
-
         });
     }
 

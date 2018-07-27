@@ -6,13 +6,12 @@ export class Wallet {
   private _keyPare: object;
   private _publicKey: string;
 
-  constructor(walletObj) {
-    
-    let temp = JSON.parse(walletObj);
+  constructor(walletJSON) {
+    let walletObj = JSON.parse(walletJSON);
 
-    this._balance = temp.balance;
-    this._keyPare = temp.keyPare;
-    this._publicKey = temp.publicKey;
+    this._balance = walletObj.balance;
+    this._keyPare = walletObj.keyPare;
+    this._publicKey = walletObj.publicKey;
   }
 
   get balance(): number {

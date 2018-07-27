@@ -17,7 +17,7 @@ export class WalletComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log(this.wallet);
   }
 
   getWalletDetails() {
