@@ -13,6 +13,16 @@ class InputDetail {
     getAddress() {
         return this.address;
     }
+
+    toString() {
+        return `
+            Input:
+                Timestamp:      ${this.timestamp}
+                Current Amount: ${this.currentAmount}
+                Address:        ${this.address}
+                Signature:      ${this.signature}
+        `;
+    }
 }
 
 module.exports = InputDetail;

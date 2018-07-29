@@ -22,6 +22,10 @@ class Transaction {
         return this.input.getAddress();
     }
 
+    getInputCurrentAmount() {
+        return this.input.currentAmount;
+    }
+
     getOutputRecipient(recipientAddress) {
 
         for (let i = 0; i < this.output.recipients.length; i++) {

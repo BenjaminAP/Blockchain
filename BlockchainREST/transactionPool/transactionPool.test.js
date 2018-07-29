@@ -29,4 +29,31 @@ describe('Transaction Pool', () => {
         expect(JSON.stringify(transactionPool.getTransactionById(oldTransaction.id))).toEqual(JSON.stringify(newTransaction));
     });
 
+
+    describe('Validation Transaction', () => {
+
+        let validTransactions;
+
+        beforeEach(() => {
+
+            wallet = new Wallet();
+            transactionPool = new TransactionPool();
+            transaction = Transaction.newTransaction(wallet, 'fsda-g334g', 30);
+            Transaction.signTransaction(transaction, wallet);
+            transactionPool.updateAddTransaction(transaction);
+        });
+
+        it('Valid transaction method working', () => {
+
+            transaction = Transaction.newTransaction(wallet, '1234-5787', 30);
+            Transaction.signTransaction(transaction, wallet);
+            transaction.input.currentAmount = 500;
+            transactionPool.updateAddTransaction(transaction);
+
+            validTransactions = transactionPool.getValidTransactions();
+
+            expect(JSON.stringify(transactionPool)).not.toEqual(JSON.stringify(validTransactions));
+        });
+    });
+
 });
